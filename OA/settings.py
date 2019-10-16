@@ -70,6 +70,14 @@ TEMPLATES = [
     },
 ]
 
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'sass_processor.finders.CssFinder',
+]
+
+SASS_PROCESSOR_ROOT = '../foodUp/static'
+
 WSGI_APPLICATION = 'OA.wsgi.application'
 
 
@@ -102,10 +110,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-SASS_PROCESSOR_INCLUDE_DIRS = (
-    os.path.join(BASE_DIR, 'mystyles/scss'),
-    os.path.join(BASE_DIR, 'node_modules'),
-)
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
