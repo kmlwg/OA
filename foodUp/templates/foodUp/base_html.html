@@ -1,0 +1,36 @@
+{% load static %}
+{% load sass_tags %}
+
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>foodUp</title>
+    <link rel="stylesheet" type="text/css" href="{% sass_src "foodUp/style.scss" %}">
+</head>
+<body>
+
+{% block body %}
+    <div class="user-bar">
+        <a href="#">Login</a>
+        <a href="#">Rejestracja</a>
+    </div>
+    <header>
+        <h1>foodUp</h1>
+        <h3>Podtytuł</h3>
+    </header>
+    <div class="navbar" id="navbar">
+        <a href="#">Główna</a>
+        <a href="#">Top</a>
+        <a href="#">W pobliżu</a>
+    </div>
+    {% block content %}
+    {% endblock %}
+{% endblock %}
+<div class="footer">
+    <h2>Footer</h2>
+</div>
+</body>
+
+</html>
