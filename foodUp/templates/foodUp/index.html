@@ -1,5 +1,8 @@
-{% extends "foodUp/base_html.html" %}
+{% load static %}
+{% load sass_tags %}
 
-{% block content %}
-    <h1>Hello</h1>
-{% endblock %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'foodUp/style.scss' %}">
+
+<h1>Hello, world!</h1>
+
