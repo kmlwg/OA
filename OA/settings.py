@@ -24,7 +24,6 @@ SECRET_KEY = 'qb=--0jnqor^(%5*^un$qlrk)x-j7ekj)px46-=pe!$w&6-+f$'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
 ALLOWED_HOSTS = []
 
 
@@ -39,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'sass_processor',
     'foodUp.apps.FoodupConfig',
+
 ]
 
 MIDDLEWARE = [
