@@ -13,7 +13,7 @@ class Company(models.Model):
 
 class Profile(models.Model):
 	name = models.CharField(max_length=30)
-	adress = models.CharField(max_length=30)
+	address = models.CharField(max_length=30)
 	telephone = models.CharField(max_length=30)
 	opening_hours = models.CharField(max_length=30)
 	sales = models.CharField(max_length=30)

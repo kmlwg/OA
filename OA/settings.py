@@ -76,7 +76,7 @@ STATICFILES_FINDERS = [
     'sass_processor.finders.CssFinder',
 ]
 
-SASS_PROCESSOR_ROOT = '../foodUp/static'
+SASS_PROCESSOR_ROOT = os.path.join(BASE_DIR, 'foodUp/static')
 
 WSGI_APPLICATION = 'OA.wsgi.application'
 
