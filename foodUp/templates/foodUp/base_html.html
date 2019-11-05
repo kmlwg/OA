@@ -4,17 +4,22 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
+    <!-- Required meta tags -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Title -->
     <title>foodUp</title>
+
+    <!-- CSS Styles -->
     <link rel="stylesheet" type="text/css" href="{% sass_src "foodUp/style.scss" %}">
 </head>
 <body>
 
 {% block body %}
     <div class="user-bar">
-        <a href="#">Login</a>
-        <a href="#">Rejestracja</a>
+        <a href="{% url 'register' %}">Login</a>
+        <a href="{% url 'register' %}">Rejestracja</a>
     </div>
     <header>
         <h1>foodUp</h1>
@@ -31,6 +36,9 @@
 <div class="footer">
     <h2>Footer</h2>
 </div>
+
+<!-- JavaScript -->
+<script src="{% sass_src "foodUp/js/app.js" %}"></script>
 </body>
 
 </html>

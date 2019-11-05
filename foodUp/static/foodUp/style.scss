@@ -6,7 +6,7 @@ $navbar-color: #333;
 }
 
 body {
-  margin: 0px;
+  margin: 0;
 }
 
 .navbar {
@@ -19,6 +19,7 @@ body {
     text-decoration: none;
     text-align: center;
   }
+
   a:hover {
     background-color: #ddd;
     color: black;
@@ -45,11 +46,13 @@ header {
     text-decoration: none;
     text-align: center;
   }
+
   a:hover {
     background-color: #ddd;
     color: black;
   }
 }
+
 .row {
   display: flex;
 
@@ -63,10 +66,8 @@ header {
   }
 }
 
-
 .footer {
   padding: 20px;
   text-align: center;
   background: #ddd;
 }
-
