@@ -1,6 +1,6 @@
 /venv/
+/env/
 *.css
 *.css.map
-__pycache__
-.idea
+.idea/
 .vscode
