@@ -1,13 +1,22 @@
 $header-color: #1abc9c;
+$buttons-color: #1abc9c;
 $navbar-color: #333;
 
 * {
   box-sizing: border-box;
 }
 
+html {
+  height: 100%;
+  overflow: auto;
+}
+  
 body {
   margin: 0;
+  padding: 0;
+  min-height: 100vh;
 }
+
 
 .navbar {
   display: flex;
@@ -71,3 +80,58 @@ header {
   text-align: center;
   background: #ddd;
 }
+
+.content-container {
+  min-height: 100vh;
+}
+
+
+
+  
+.form-container {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+  max-width: 600px;
+  text-align: left;
+
+  input[type=text], input[type=password], input[type=email], select, textarea {
+    max-width: 600px;
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+  }
+    
+  label {
+    padding: 12px 12px 12px 0;
+    display: inline-block;
+  }
+    
+  input[type=submit] {
+    background-color: $buttons-color;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    float: right;
+  }
+    
+  input[type=submit]:hover {
+    background-color: #45a049;
+  }
+
+    /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+  
+  
+
+  
+
