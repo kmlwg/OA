@@ -1,26 +1,22 @@
-from django import forms 
-from .models import User, Company
+from django import forms
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 
 
-class UserRegisterForm(forms.ModelForm):
-	password = forms.CharField(widget=forms.PasswordInput)
+class RegisterForm(UserCreationForm):
+	user = forms.CharField(max_length=10, min_length=3)
+	email = forms.EmailField()
+	# company - depends on type of the account:
+	# 0 - for User
+	# 1 - for Company
+	company = forms.BooleanField()
 
 	class Meta:
 		model = User
-		fields = [
-			'login',
-			'password',
-			'mail'
-		]
-
-
-class CompanyRegisterForm(forms.ModelForm):
-	password = forms.CharField(widget=forms.PasswordInput)
-
-	class Meta:
-		model = Company
-		fields = [
-			'login',
-			'password',
-			'mail'
-		]
+		fields = (
+			'user',
+			'email',
+			'company',
+			'password1',
+			'password2'
+		)

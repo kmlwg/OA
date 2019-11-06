@@ -1,31 +1,33 @@
-from django.shortcuts import render
-from django.http import HttpResponse
-from .forms import UserRegisterForm, CompanyRegisterForm
+from django.shortcuts import render, redirect
+from django.contrib.auth import login, authenticate
+from foodUp.forms import RegisterForm
 
 
 def index(request):
+    """
+
+    :param request:
+    :return:
+    """
     return render(request, 'foodUp/index.html')
 
 
 def register(request):
-    form = UserRegisterForm(request.POST or None)
-    if form.is_valid():
-        form.save(commit=True)
-        form = UserRegisterForm()
+    """
 
-    context = {
-        'form': form
-    }
-    return render(request, 'foodUp/register.html', context)
-
-
-def company_register(request):
-    form = CompanyRegisterForm(request.POST or None)
-    if form.is_valid():
-        form.save(commit=True)
-        form = CompanyRegisterForm()
-
-    context = {
-        'form': form
-    }
-    return render(request, 'foodUp/company_register.html', context)
+    :param request:
+    :return:
+    """
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            user.refresh_from_db()
+            user.save()
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=user.username, password=raw_password)
+            login(request, user)
+            return redirect('home')
+    else:
+        form = RegisterForm()
+    return render(request, 'foodUp/register.html', {'form': form})
