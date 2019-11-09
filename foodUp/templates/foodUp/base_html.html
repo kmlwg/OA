@@ -18,8 +18,9 @@
 
 {% block body %}
     <div class="user-bar">
-        <a href="{% url 'register' %}">Login</a>
-        <a href="{% url 'register' %}">Rejestracja</a>
+        {% comment %} <a href="{% url 'register' %}">Login</a> {% endcomment %}
+        <a href="#">Login</a>
+        <a href="/register">Rejestracja</a>
     </div>
     <header>
         <h1>foodUp</h1>
@@ -40,7 +41,7 @@
 </div>
 
 <!-- JavaScript -->
-<script src="{% sass_src "foodUp/js/app.js" %}"></script>
+<script src="{% sass_src "foodUp/js/app.js" %}"></script> 
 </body>
 
 </html>

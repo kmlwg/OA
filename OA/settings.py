@@ -24,6 +24,7 @@ SECRET_KEY = 'qb=--0jnqor^(%5*^un$qlrk)x-j7ekj)px46-=pe!$w&6-+f$'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+
 ALLOWED_HOSTS = []
 
 
@@ -38,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'sass_processor',
     'foodUp.apps.FoodupConfig',
-
 ]
 
 MIDDLEWARE = [
@@ -76,7 +76,7 @@ STATICFILES_FINDERS = [
     'sass_processor.finders.CssFinder',
 ]
 
-SASS_PROCESSOR_ROOT = os.path.join(BASE_DIR, 'foodUp/static')
+SASS_PROCESSOR_ROOT = '../foodUp/static'
 
 WSGI_APPLICATION = 'OA.wsgi.application'
 
@@ -129,3 +129,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+AUTH_USER_MODEL = "foodUp.User" 
