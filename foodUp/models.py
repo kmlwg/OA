@@ -18,13 +18,13 @@ class UserProfile(models.Model):
 
 
 class CompanyProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True, null=False, related_name='company_profile')
-    name = models.CharField(max_length=40, unique=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True,  related_name='company_profile')
+    name = models.CharField(max_length=40, default='')
     phone_number = models.CharField(max_length=11)
-    time_opened = models.TimeField()
-    time_closed = models.TimeField()
+    time_opened = models.TimeField(null=True)
+    time_closed = models.TimeField(null=True)
     rating = models.FloatField(validators=[MaxValueValidator(10.0), MinValueValidator(0.0)], default=0.0)
-    description = models.TextField()
+    description = models.TextField(default='')
 
 
 class Address(models.Model):
@@ -45,7 +45,7 @@ class Tag(models.Model):
 # @receiver(models.signals.post_save, sender=User)
 # def create_user_profile(sender, instance, created, **kwargs):
 # 	print('****', created)
-# 	if instance.user_type == 1:
+# 	if not instance.is_company:
 # 	    UserProfile.objects.get_or_create(user = instance)
 # 	else:
 # 		CompanyProfile.objects.get_or_create(user = instance)
@@ -53,10 +53,10 @@ class Tag(models.Model):
 # @receiver(models.signals.post_save, sender=User)
 # def save_user_profile(sender, instance, **kwargs):
 # 	print('_-----')	
-# 	if instance.user_type == 1:
+# 	if not instance.is_company:
 # 		instance.user_profile.save()
 # 	else:
-# 		CompanyProfile.objects.get_or_create(user = instance)
+# 		CompanyProfile.objects.save()
 
 
 

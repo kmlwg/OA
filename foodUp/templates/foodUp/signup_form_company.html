@@ -1,6 +1,7 @@
 {% extends "foodUp/base_html.html" %}
 
 {% block content %}
+<a href="/register_user">Zarejestruj użytkownika</a>
 <div class=form-container>
 	<form method="POST"> {% csrf_token%}
 	{{ form.as_p }}
