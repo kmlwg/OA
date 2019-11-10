@@ -2,4 +2,14 @@
 
 {% block content %}
     <h1>Hello</h1>
+    {% if user.is_authenticated and not user.is_company %}
+        <h2>Użytkownik</h2>
+    {% else %}
+        <h2>Niezalogowany</h2>
+    {% endif %}
+    {% if user.is_authenticated and user.is_company %}
+        <h2>Firma</h2>
+    {% else %}
+        <h2>Nie firma</h2>
+    {% endif %}
 {% endblock %}
