@@ -1,0 +1,15 @@
+{% extends "../foodUp/base_html.html" %}
+
+{% block title%}
+    Zaloguj się
+{%endblock%}
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" class="btn">Login</input>
+    <p>Nie masz konta? <a href="/register_user">Zarejestruj się</a></p>
+</form>
+{% endblock content %}
+
