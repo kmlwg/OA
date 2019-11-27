@@ -1,11 +1,14 @@
 {% extends "foodUp/base.html" %}
 {% block body %}
+	<div class="container col-sm-8">
 	{% if user.is_company %}
-		<a href="{% url 'new-post' %}">Post</a>
+		<a class="btn btn-info btn-sm mt-1 mb-3 ml-5" href="{% url 'new-post' %}">Post</a>
 	{% endif %}
      {% for post in posts %}
         <article class="media content-section">
-          <img class="rounded-circle article-img" src="{{ post.author.profile.logo.url }}">
+			<div class="col-sm-3">
+				<img class="img-fluid img-thumbnail" src="{{ post.author.profile.logo.url }}">
+			</div>
           <div class="media-body">
             <div class="article-metadata">
 			  <h2><a class="article-title" href="{% url 'profile-detail' post.author.profile.id %}">{{ post.author.profile.name }}</a></h2>
@@ -15,10 +18,10 @@
           </div>
 		  {% if user.profile.pk == post.author.profile.pk %}
 			<a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'update-post' post.id %}">Update</a>
-			<a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'delete-post' post.id %}">Delete</a>
-		  {% endif %}
-		  
+			<a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'delete-post' post.id %}">Delete</a>
+		  {% endif %}	  
         </article>
     {% endfor %}
+	</div>
 {% endblock %}
 

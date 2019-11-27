@@ -1,24 +1,25 @@
 {% extends "foodUp/base.html" %}
 {% block body %}
-<div>
-
-	{% if user.is_company %}
-		<a href="{% url 'new-post' %}">Post</a>
-		</br>
-		<a href="{% url 'editprofile' %}">Edit Profile</a> </br>
-	{% endif %}
-	<img src = "{{ user.profile.logo.url }}">
-	{{user.profile.name}} </br>
-	Rate: {{user.profile.rate}} </br>
-	Description: {{user.profile.description}} </br>
-	Email: {{user.profile.email}} </br>
-	Phone: {{user.profile.phone_number}} </br>
-	Address: {{user.profile.adres}} </br>
-	Time opened: {{user.profile.time_opened}} </br>
-	Time closed: {{user.profile.time_closed}} </br>
-	What we offer: {{user.profile.category}} </br>
-</div>
-<div>
-
-</div>
+	<div class="container col-sm-10 mx-auto mt-5 bg-light">
+		<div class="row">
+			<div class="col-sm-4">
+				<img src = "{{ user.profile.logo.url }}" class="img-fluid img-thumbnail mt-5 mb-5">
+				{% if user.is_company %}
+				<a class="btn btn-info btn-sm mt-1 mb-1 mx-auto" href="{% url 'new-post' %}">Post</a>
+				<a class="btn btn-success btn-sm mt-1 mb-1 mx-auto" href="{% url 'editprofile' %}">Edit Profile</a>
+				{% endif %}
+			</div>
+			<div class="col-md-6 mx-auto">
+				<h1 class"text-body">{{user.profile.name}}</h1>
+				<h2 class="text-success">Rate: {{user.profile.rate}}</h2>
+				<h3 class="text-muted"><em>Description: {{user.profile.description}}</em></h3>
+				<h6 class="text-info">Email: {{user.profile.email}}</h6>
+				<h6 class="text-info">Phone: {{user.profile.phone_number}}</h6>
+				<h6>Address: {{user.profile.adres}}</h4>
+				<h6>Time opened: {{user.profile.time_opened}}</h6>
+				<h6>Time closed: {{user.profile.time_closed}}</h6>
+				<h6>What we offer: {{user.profile.category}}</h6>
+			</div>
+		</div>
+	</div>
 {% endblock %}

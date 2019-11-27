@@ -1,46 +1,45 @@
 {% extends "foodUp/base.html" %}
 {% load crispy_forms_tags %}
 {% block body %}
-  <article class="media content-section">
-    <img class="rounded-circle article-img" src="{{ object.author.profile.logo.url }}">
-    <div class="media-body">
-      <div class="article-metadata">
-        <a class="mr-2" href="#">{{ object.name }}</a>
-      </div>
-      <p class="article-content">{{ object.description }}</p>
-    </div>
-  </article>
-  {{ object.email}}
-  {{profile.name}}
- 	Rate: {{profile.rate}} </br>
-	Description: {{profile.description}} </br>
-	Email: {{profile.email}} </br>
-	Phone: {{profile.phone_number}} </br>
-	Address: {{profile.adres}} </br>
-	Time opened: {{profile.time_opened}} </br>
-	Time closed: {{profile.time_closed}} </br>
-	What we offer: {{profile.category}} </br>
-	
-	{{n}}
+
+	<div class="container col-sm-10 mx-auto mt-5 bg-light">
+		<div class="row">
+			<div class="col-sm-4">
+				<img src = "{{ profile.logo.url }}" class="img-fluid img-thumbnail mt-5">
+			</div>
+			<div class="col-md-6 mx-auto">
+				<h1 class"text-body">{{profile.name}}</h1>
+				<h2 class="text-success">Rate: {{profile.rate}}</h2>
+				<h3 class="text-muted"><em>Description: {{profile.description}}</em></h3>
+				<h6 class="text-info">Email: {{profile.email}}</h6>
+				<h6 class="text-info">Phone: {{profile.phone_number}}</h6>
+				<h6>Address: {{profile.adres}}</h4>
+				<h6>Time opened: {{profile.time_opened}}</h6>
+				<h6>Time closed: {{profile.time_closed}}</h6>
+				<h6>What we offer: {{profile.category}}</h6>
+			</div>
+		</div>
+
+
   {% if user.is_authenticated %}
-  	<form method="POST">
-		{% csrf_token %}
-		{{ save_form|crispy }}
-		<button type="submit" >Save</button>
-	</form>
- 	<form method="POST">
+  <div class="mt-5 height=10">
+	<form method="POST">
 		{% csrf_token %}
 		{{ form|crispy}}
-		<button type="submit">Commit</button>
+		<div class="float-right mb=5"><button type="submit">Commit</button></div>
 	</form>
+	</div>
   {% else %}
     Sign up to make comment! 
 	<a href="{% url 'login' %}">Log in</a>
   {% endif %}
-  
+  <div class="article-metadata mt-5">
 	{% for c in com %}
-		{{c.sender}}
-		{{c.com}}
-		</br>
+        <article class="media content-section border border-info rounded my-2">
+            <div class="article-metadata">
+			  <h4 class="text-primary ml-3">{{ c.sender }}</h4>
+            <p class="article-content ml-5">{{ c.com }}</p>	  
+        </article>
 	{% endfor %}
+	</div>
 {% endblock %}
