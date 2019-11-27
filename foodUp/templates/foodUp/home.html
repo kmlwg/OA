@@ -1,0 +1,8 @@
+{% extends "foodUp/base.html" %}
+{% block body %}
+	{% for post in posts %}
+		<h1>{{ post.author }}</h1>
+		<h1>{{ post.content }}</h1>
+	{% endfor %}
+{% endblock %}
+

@@ -1,0 +1,11 @@
+{% extends "foodUp/base.html" %}
+{% load crispy_forms_tags %}
+{% block body %}
+	<div>
+		<form method="POST">
+			{% csrf_token %}
+			{{ form|crispy }}
+			<button type="submit">Add</button>
+		</form>
+	</div>
+{% endblock %}

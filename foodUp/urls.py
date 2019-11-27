@@ -1,13 +1,16 @@
-from django.urls import path, include
-from django.views.generic import TemplateView
+from django.urls import path
+from . import views
+from .views import PostListView, ProfileDetailView, PostCreateView, PostUpdateView, PostDeleteView
 
-from .views import  index, UserProfileSignUpView, CompanyProfileSignUpView
 
 
 urlpatterns = [
-    path('', index, name='index'),
-    path('register_user', UserProfileSignUpView.as_view(), name='register_user'),
-    path('register_company', CompanyProfileSignUpView.as_view(), name='register_company'),
-    path('', include('django.contrib.auth.urls')),
-    path('accounts/profile/', TemplateView.as_view(template_name='accounts/profile.html'), name='profile'),
+	path('', views.home, name='home'),
+	path('news/', PostListView.as_view(), name='news'),
+	path('search/', views.search, name='search'),
+	path('newcompany/', views.newcompany, name='newcompany'),
+	path('news/<int:pk>/', ProfileDetailView.as_view(), name='profile-detail'),
+	path('news/newpost/', PostCreateView.as_view(success_url='/news/'), name='new-post'),
+	path('news/<int:pk>/update', PostUpdateView.as_view(success_url='/news/'), name='update-post'),
+	path('news/<int:pk>/delete', PostDeleteView.as_view(success_url='/news/'), name='delete-post'),
 ]

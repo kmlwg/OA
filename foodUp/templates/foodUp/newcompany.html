@@ -1,0 +1,11 @@
+{% extends "foodUp/base.html" %}
+{% block body %}
+	{% for i in n %}
+	<a class="article-title" href="{% url 'profile-detail' i.id %}">{{i.name}}</a>
+	{{i.description}}
+	{{i.rate}}
+	{{i.category}}
+	</br>
+	{% endfor %}
+{% endblock %}
+

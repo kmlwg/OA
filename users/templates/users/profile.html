@@ -1,0 +1,24 @@
+{% extends "foodUp/base.html" %}
+{% block body %}
+<div>
+
+	{% if user.is_company %}
+		<a href="{% url 'new-post' %}">Post</a>
+		</br>
+		<a href="{% url 'editprofile' %}">Edit Profile</a> </br>
+	{% endif %}
+	<img src = "{{ user.profile.logo.url }}">
+	{{user.profile.name}} </br>
+	Rate: {{user.profile.rate}} </br>
+	Description: {{user.profile.description}} </br>
+	Email: {{user.profile.email}} </br>
+	Phone: {{user.profile.phone_number}} </br>
+	Address: {{user.profile.adres}} </br>
+	Time opened: {{user.profile.time_opened}} </br>
+	Time closed: {{user.profile.time_closed}} </br>
+	What we offer: {{user.profile.category}} </br>
+</div>
+<div>
+
+</div>
+{% endblock %}
