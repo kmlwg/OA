@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 	'foodUp.apps.FoodupConfig',
 	'multiselectfield',
 	'crispy_forms',
+    'star_ratings',
 ]
 
 MIDDLEWARE = [

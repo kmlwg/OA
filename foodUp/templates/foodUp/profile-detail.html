@@ -1,5 +1,6 @@
 {% extends "foodUp/base.html" %}
 {% load crispy_forms_tags %}
+{% load ratings %}
 {% block body %}
 
 	<div class="container col-sm-10 mx-auto mt-5 bg-light">
@@ -9,7 +10,8 @@
 			</div>
 			<div class="col-md-6 mx-auto">
 				<h1 class"text-body">{{profile.name}}</h1>
-				<h2 class="text-success">Rate: {{profile.rate}}</h2>
+				{% ratings profile %}
+				{% comment %} <h2 class="text-success">Rate: {{profile.rate}}</h2> {% endcomment %}
 				<h3 class="text-muted"><em>Description: {{profile.description}}</em></h3>
 				<h6 class="text-info">Email: {{profile.email}}</h6>
 				<h6 class="text-info">Phone: {{profile.phone_number}}</h6>
