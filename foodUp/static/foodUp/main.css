@@ -1,18 +1,33 @@
-body
-{
-	background-color: #EEEEEE
+body {
+    background: #fafafa;
+    color: #333333;
 }
 
-.navbar
-{
-	min-height: 40px;
+.bg-jumpers {
+    background-color: #992f27;
 }
 
-.bg-jumpers
-{
-	background-color: #990000 !important;
+h1, h2, h3, h4, h5, h6 {
+    color: #444444;
 }
 
+ul {
+    margin: 0;
+}
 
+.site-header .navbar-nav .nav-link {
+    color: #cbd5db;
+}
 
+.site-header .navbar-nav .nav-link:hover {
+    color: #ffffff;
+}
 
+.site-header .navbar-nav .nav-link.active {
+    font-weight: 500;
+}
+
+.article-metadata a:hover {
+    color: #333;
+    text-decoration: none;
+}

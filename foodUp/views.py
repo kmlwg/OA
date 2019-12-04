@@ -157,20 +157,3 @@ def newcompany(request):
         'n': n
     }
     return render(request, 'foodUp/newcompany.html', context)
-
-"""
-def maps(request):
-    geolocator = Nominatim()
-    restaurant = Profile.objects.filter(name='Polufka')
-    name = restaurant[0].name
-    address = restaurant[0].adres
-    location = geolocator.geocode(address)
-
-    coordinates = {
-        "name": name,
-        "lat": location.latitude,
-        "lng": location.longitude
-    }
-
-    return render(request, 'foodUp/maps.html', coordinates)
-"""
