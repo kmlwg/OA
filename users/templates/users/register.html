@@ -1,11 +1,21 @@
 {% extends "foodUp/base.html" %}
 {% load crispy_forms_tags %}
 {% block body %}
-	<div>
-		<form method="POST">
-			{% csrf_token %}
-			{{ form|crispy }}
-			<button type="submit">Sign in</button>
-		</form>
-	</div>
+	<div class="myH2">
+    <form method="POST" class="text-center border border-light p-5">
+        {% csrf_token %}
+        <p class="mb-4">Sign up</p>
+        <div class="card" style="margin: auto">
+            <div class="card-body px-lg-5">
+                <form class="text-center">
+                    <div class="md-form mt-3">{{ form.username|as_crispy_field }}</div>
+                    <div class="md-form mt-3">{{ form.is_company|as_crispy_field }}</div>
+                    <div class="md-form">{{ form.password1|as_crispy_field }}</div>
+                    <div class="md-form">{{ form.password2|as_crispy_field }}</div>
+                    <button class="btn btn-primary" type="submit" style="font-size: 3rem; padding: 1rem 4rem 1rem 4rem; border-radius: 100px; border: 1px solid">Sign up</button>
+                </form>
+            </div>
+        </div>
+    </form>
+</div>
 {% endblock %}

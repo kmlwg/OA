@@ -1,7 +1,8 @@
 {% extends "foodUp/base.html" %}
 {% block body %}
-	<div>
-		<h2>You are log out</h2>
-		<button type="submit">Log in again</button>
+	<div style="text-align: center">
+		<h2 class="myH2" style="margin-top: 20px">You are log out</h2>
+		<a href="{% url 'login' %}"><button type="submit" class="btn btn-primary" style="font-size: 2rem; padding: 1rem 4rem 1rem 4rem; border-radius: 100px; border: 1px solid">
+            Log in again</button></a>
 	</div>
 {% endblock %}
