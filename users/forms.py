@@ -2,10 +2,12 @@ from django import forms
 #from django.contrib.auth.models import User
 from .models import User, Profile
 from django.contrib.auth.forms import UserCreationForm
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Layout, Fieldset, HTML
 
 
 class UserRegisterForm(UserCreationForm):
-    is_company = forms.NullBooleanField()
+    is_company = forms.NullBooleanField(initial=False)
 
     class Meta:
         model = User
