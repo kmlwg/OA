@@ -117,15 +117,11 @@ def search(request):
     if request.method == "POST":
         my_form = Category(request.POST)
         if my_form.is_valid():
-            s = my_form.cleaned_data.get('s')
-            c = my_form.cleaned_data.get('c')
-            r = my_form.cleaned_data.get('r')
+            s = my_form.cleaned_data.get('search')
+            c = my_form.cleaned_data.get('category')
+            r = my_form.cleaned_data.get('rating')
             to = my_form.cleaned_data.get('to')
-
-            if s != None:
-                profiles = Profile.objects.filter(name__icontains=s)
-            else:
-                profiles = Profile.objects.all()
+            profiles = Profile.objects.filter(name__icontains=s)
 
             if c:
                 f_profiles = []
