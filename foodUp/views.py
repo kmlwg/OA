@@ -8,7 +8,11 @@ from geopy.geocoders import Nominatim
 
 
 def home(request):
-    return render(request, 'foodUp/home.html')
+    n = Profile.objects.order_by('-pk')[:3]
+    context = {
+        'n': n
+    }
+    return render(request, 'foodUp/newcompany.html', context)
 
 
 class PostListView(ListView):

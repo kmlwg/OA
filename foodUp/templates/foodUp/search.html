@@ -19,13 +19,18 @@
         </form>
     <div>
         {% for i in profiles %}
-            <img src="{{ i.logo.url }}">
-            <h2><a class="article-title" href="{% url 'profile-detail' i.user.profile.id %}">{{ i.name }}</a></h2>
-            {{ i.rate }}
-            {{ i.category }}
-            {{ i.time_opened }}
-            {{ i.time_closed }}
-            <h1></h1>
+			        <div class="row my-border my-3">
+            <div class="col-sm-3">
+                <img class="img-fluid img-thumbnail" src="{{ i.logo.url }}">
+            </div>
+            <div class="col-sm-6 mt-3">
+                <h2><a class="article-title" style="font-size: 2rem" href="{% url 'profile-detail' i.user.profile.id %}">{{ i.name }}</a></h2>
+                <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
+                <span style="font-size: 1.4rem">Category: </span><span class="article-content" style="font-size: 1.4rem">{{ i.category }}</span><br/>
+				<span style="font-size: 1.4rem">Open: </span><span class="article-content" style="font-size: 1.4rem">{{ i.time_opened }}</span><br/>
+				<span style="font-size: 1.4rem">Close: </span><span class="article-content" style="font-size: 1.4rem">{{ i.time_closed }}</span><br/>
+            </div>
+        </div>
         {% endfor %}
     </div>
 {% endblock %}
