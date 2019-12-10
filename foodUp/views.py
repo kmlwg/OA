@@ -121,7 +121,11 @@ def search(request):
             c = my_form.cleaned_data.get('c')
             r = my_form.cleaned_data.get('r')
             to = my_form.cleaned_data.get('to')
-            profiles = Profile.objects.filter(name__icontains=s)
+
+            if s != None:
+                profiles = Profile.objects.filter(name__icontains=s)
+            else:
+                profiles = Profile.objects.all()
 
             if c:
                 f_profiles = []
