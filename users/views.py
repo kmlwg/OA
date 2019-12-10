@@ -1,27 +1,35 @@
 from django.shortcuts import render, redirect
 from .forms import UserRegisterForm, EditProfile
 from .models import User, Profile
+from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 
 
 
 
 def register(request):
- if request.method == "POST":
-  form = UserRegisterForm(request.POST)
-  if form.is_valid():
-   form.save()
-   username = form.cleaned_data.get('username')
-   is_company = form.cleaned_data.get('is_company')
-   return redirect('login')
- else:
-  form = UserRegisterForm()
- return render(request, 'users/register.html', {'form': form})
+	if request.method == "POST":
+		form = UserRegisterForm(request.POST)
+		if form.is_valid():
+			new_user = form.save()
+			is_company = form.cleaned_data.get('is_company')
+			new_user = authenticate(request, username=form.cleaned_data.get('username'),
+									password=form.cleaned_data.get('password1'))
+			login(request, new_user)
+			
+			if is_company:
+				return redirect('editprofile')
+			else:
+				return redirect('/')
+	else:
+		form = UserRegisterForm()
+		
+	return render(request, 'users/register.html', {'form': form})
 	
 	
 @login_required
 def profile(request):
- return render(request, 'users/profile.html')
+	return render(request, 'users/profile.html')
 	
 	
 def editprofile(request):
@@ -32,7 +40,8 @@ def editprofile(request):
 			edit_form.save()
 			return redirect('profile')
 	else:
-	 edit_form = EditProfile(instance=request.user.profile)
+		edit_form = EditProfile(instance=request.user.profile)
+		
 	context = {
 		'edit_form': edit_form
 	}
