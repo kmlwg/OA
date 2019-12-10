@@ -5,7 +5,7 @@ from django.contrib.auth.forms import UserCreationForm
 
 
 class UserRegisterForm(UserCreationForm):
-    is_company = forms.NullBooleanField()
+    is_company = forms.NullBooleanField(initial=False)
 
     class Meta:
         model = User
