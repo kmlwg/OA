@@ -5,8 +5,6 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 
 
-
-
 def register(request):
 	if request.method == "POST":
 		form = UserRegisterForm(request.POST)
@@ -46,4 +44,3 @@ def editprofile(request):
 		'edit_form': edit_form
 	}
 	return render(request, 'users/editprofile.html', context)
-	
