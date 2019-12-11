@@ -14,8 +14,18 @@ class Profile(models.Model):
 		('pizza', 'pizza'),
 		('beer', 'beer'),
 		('pasta', 'pasta'),
-		('burger', 'burger'), 
-	 )
+		('burger', 'burger'),
+		('cake', 'cake'),
+		('chinese', 'chinese'),
+		('soup', 'soup'),
+		('pancakes', 'pancakes'),
+		('dumplings', 'dumplings'),
+	)
+	PRICE_CHOICES = (
+		('$', '$'),
+		('$$', '$$'),
+		('$$$', '$$$'),
+	)
 	user = models.OneToOneField(User, on_delete=models.CASCADE)
 	name = models.TextField()
 	logo = models.ImageField(default='default.jpg', upload_to='profile_pics')
@@ -27,6 +37,7 @@ class Profile(models.Model):
 	time_closed = models.TimeField(null=True)
 	rate = models.DecimalField(default=0.0, max_digits = 5, decimal_places=2)
 	category = MultiSelectField(choices = FOOD_CHOICES, default=None)
+	price = MultiSelectField(choices=PRICE_CHOICES, default=None)
 	
 	def __str__(self):
 		return self.user.username

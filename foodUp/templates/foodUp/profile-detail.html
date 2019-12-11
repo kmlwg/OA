@@ -3,85 +3,84 @@
 {% load ratings %}
 {% block body %}
 
-	<div class="container col-sm-10 mx-auto mt-5 bg-light">
-		<div class="row">
-			<div class="col-sm-4">
-				<img src = "{{ profile.logo.url }}" class="img-fluid img-thumbnail mt-5">
-			</div>
-			<div class="col-md-6 mx-auto">
-				<h1 class"text-body">{{profile.name}}</h1>
-				{% ratings profile %}
-				{% comment %} <h2 class="text-success">Rate: {{profile.rate}}</h2> {% endcomment %}
-				<h3 class="text-muted"><em>Description: {{profile.description}}</em></h3>
-				<h6 class="text-info">Email: {{profile.email}}</h6>
-				<h6 class="text-info">Phone: {{profile.phone_number}}</h6>
-				<h6>Address: {{profile.adres}}</h4>
-				<h6>Time opened: {{profile.time_opened}}</h6>
-				<h6>Time closed: {{profile.time_closed}}</h6>
-				<h6>What we offer: {{profile.category}}</h6>
-			</div>
-		</div>
+    <div class="container col-sm-10 mx-auto mt-5 bg-light">
+        <div class="row">
+            <div class="col-sm-4">
+                <img src="{{ profile.logo.url }}" class="img-fluid img-thumbnail mt-5">
+            </div>
+            <div class="col-md-6 mx-auto">
+                <h1 class="text-body">{{ profile.name }}</h1>
+                {% ratings profile %}
+                {% comment %} <h2 class="text-success">Rate: {{profile.rate}}</h2> {% endcomment %}
+                <h3 class="text-muted"><em>Description: {{ profile.description }}</em></h3>
+                <h6 class="text-info">Email: {{ profile.email }}</h6>
+                <h6 class="text-info">Phone: {{ profile.phone_number }}</h6>
+                <h6>Address: {{ profile.adres }}</h6>
+                <h6>Time opened: {{ profile.time_opened }}</h6>
+                <h6>Time closed: {{ profile.time_closed }}</h6>
+                <h6>What we offer: {{ profile.category }}</h6>
+            </div>
+        </div>
+        <script async defer
+                src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAkVfvbVKppTkQajKJ47OxVrMk2C1uPgEw&callback=initMap"></script>
+        <br/><br/>
+        <div id="map" style="height: 400px; width: 100%; margin: auto;">
+            <script>
+                function initMap() {
+                    // Map options
+                    let options = {
+                        zoom: 15,
+                        center: {lat: {{ lat }}, lng: {{ lng }}}
+                    };
+
+                    // New map
+                    let map = new google.maps.Map(document.getElementById('map'), options);
 
 
-  {% if user.is_authenticated %}
-  <div class="mt-5 height=10">
-	<form method="POST">
-		{% csrf_token %}
-		{{ form|crispy}}
-		<div class="float-right mb=5"><button type="submit">Commit</button></div>
-	</form>
-	</div>
-  {% else %}
-    Sign up to make comment! 
-	<a href="{% url 'login' %}">Log in</a>
-  {% endif %}
-  <div class="article-metadata mt-5">
-	{% for c in com %}
-        <article class="media content-section border border-info rounded my-2">
-            <div class="article-metadata">
-			  <h4 class="text-primary ml-3">{{ c.sender }}</h4>
-            <p class="article-content ml-5">{{ c.com }}</p>	  
-        </article>
-	{% endfor %}
-	</div>
-    <style>
-        #map {
-            height: 400px;
-            width: 100%;
-            margin: auto;
-        }
-    </style>
-    <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAkVfvbVKppTkQajKJ47OxVrMk2C1uPgEw&callback=initMap"></script>
-    <br/><br/>
-    <div id="map">
-        <script>
-            function initMap() {
-                // Map options
-                let options = {
-                    zoom: 15,
-                    center: {lat: {{ lat }}, lng: {{ lng }}}
-                };
+                    // Add marker
+                    let marker = new google.maps.Marker({
+                        position: {lat: {{ lat }}, lng: {{ lng }}},
+                        map: map
+                    });
 
-                // New map
-                let map = new google.maps.Map(document.getElementById('map'), options);
+                    let infoWindow = new google.maps.InfoWindow({
+                        content: '<h1>{{ name }}</h1>'
+                    });
 
+                    marker.addListener('click', function () {
+                        infoWindow.open(map, marker);
+                    });
 
-                // Add marker
-                let marker = new google.maps.Marker({
-                    position: {lat: {{ lat }}, lng: {{ lng }}},
-                    map: map
-                });
+                }
+            </script>
+        </div>
 
-                let infoWindow = new google.maps.InfoWindow({
-                    content: '<h1>{{ name }}</h1>'
-                });
-
-                marker.addListener('click', function () {
-                    infoWindow.open(map, marker);
-                });
-
-            }
-        </script>
+        {% if user.is_authenticated %}
+            <div class="mt-5 height=10">
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <div class="float-right mb=5">
+                        <button class="btn btn-primary" type="submit"
+                                style="font-size: 2rem; padding: 1rem 2rem 1rem 2rem; border-radius: 100px; border: 1px solid">
+                            Comment
+                        </button>
+                    </div>
+                </form>
+            </div>
+        {% else %}
+            Sign up to make comment!
+            <a href="{% url 'login' %}">Log in</a>
+        {% endif %}
+        <div class="article-metadata mt-5">
+            {% for c in com %}
+                <article class="media content-section border border-info rounded my-2">
+                    <div class="article-metadata">
+                        <h4 class="text-primary ml-3">{{ c.sender }}</h4>
+                        <p class="article-content ml-5">{{ c.com }}</p>
+                    </div>
+                </article>
+            {% endfor %}
+        </div>
     </div>
 {% endblock %}

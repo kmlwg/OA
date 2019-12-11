@@ -13,10 +13,21 @@ class Category(forms.Form):
         ('pizza', 'pizza'),
         ('beer', 'beer'),
         ('pasta', 'pasta'),
-        ('burger', 'burger')
+        ('burger', 'burger'),
+		('cake', 'cake'),
+		('chinese', 'chinese'),
+		('soup', 'soup'),
+		('pancakes', 'pancakes'),
+        ('dumplings', 'dumplings'),
+    )
+    PRICES = (
+        ('$', '$'),
+        ('$$', '$$'),
+        ('$$$', '$$$'),
     )
     search = forms.CharField(required=False)
     category = forms.MultipleChoiceField(required=False, widget=forms.CheckboxSelectMultiple, choices=OPTIONS)
+    price = forms.MultipleChoiceField(required=False, widget=forms.CheckboxSelectMultiple, choices=PRICES)
     rating = forms.DecimalField(required=False)
 
 

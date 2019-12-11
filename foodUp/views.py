@@ -5,6 +5,15 @@ from .forms import Search, Category, MakeComment, SaveFavourite
 from users.models import User, Profile, Favourites
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from geopy.geocoders import Nominatim
+from geopy.exc import GeocoderTimedOut
+
+
+def do_geocode(address):
+    geolocator = Nominatim()
+    try:
+        return geolocator.geocode(address)
+    except GeocoderTimedOut:
+        return do_geocode(address)
 
 
 def home(request):
@@ -32,11 +41,10 @@ class ProfileDetailView(DetailView):
         com = Comment.objects.filter(receiver_id=kwargs['pk'])
 
         # Map
-        geolocator = Nominatim()
         restaurant = Profile.objects.filter(id=kwargs['pk'])
         name = restaurant[0].name
         address = restaurant[0].adres
-        location = geolocator.geocode(address)
+        location = do_geocode(address)
 
         context = {
             'profile': profile,
@@ -70,11 +78,10 @@ class ProfileDetailView(DetailView):
                 new_fav.save()
 
         # Map
-        geolocator = Nominatim()
         restaurant = Profile.objects.filter(id=kwargs['pk'])
         name = restaurant[0].name
         address = restaurant[0].adres
-        location = geolocator.geocode(address)
+        location = do_geocode(address)
 
         context = {
             'profile': profile,
@@ -135,6 +142,7 @@ def search(request):
             s = my_form.cleaned_data.get('search')
             c = my_form.cleaned_data.get('category')
             r = my_form.cleaned_data.get('rating')
+            pr = my_form.cleaned_data.get('price')
             to = my_form.cleaned_data.get('to')
             profiles = Profile.objects.filter(name__icontains=s)
 
@@ -154,6 +162,16 @@ def search(request):
                         f_profiles.append(p)
 
                 profiles = f_profiles
+
+            if pr:
+                f_profiles = []
+                for price in pr:
+                    for p in profiles:
+                        if price in p.price:
+                            f_profiles.append(p)
+
+                profiles = set(f_profiles)
+
             context = {
                 'form': my_form,
                 'profiles': profiles

@@ -1,13 +1,10 @@
 from django import forms
-# from django.contrib.auth.models import User
 from .models import User, Profile
 from django.contrib.auth.forms import UserCreationForm
-from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Fieldset, HTML
 
 
 class UserRegisterForm(UserCreationForm):
-    is_company = forms.NullBooleanField(initial=False)
+    is_company = forms.NullBooleanField()
 
     class Meta:
         model = User
@@ -17,4 +14,4 @@ class UserRegisterForm(UserCreationForm):
 class EditProfile(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['name', 'description', 'adres', 'email', 'time_opened', 'time_closed', 'phone_number', 'category']
+        fields = ['name', 'description', 'adres', 'email', 'time_opened', 'time_closed', 'phone_number', 'category', 'price']

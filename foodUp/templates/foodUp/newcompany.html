@@ -5,13 +5,13 @@
         Recently added
     </div><br/>
     <div class="myP">
-	{% for i in n.values %}
-        <a class="myH2" style="text-decoration: none" href="{% url 'profile-detail' i.id %}">{{i.name}}</a><br/>
-	<img class="img-fluid img-thumbnail" src="{{ i.logo.url }}"><br/>
-	{{i.description}}<br/>
-	Rating: {{i.rate}}<br/>
-	Category: {{i.category}}
-	<br/><br/>
-	{% endfor %}</div>
+        {% for i in n %}
+            <a class="myH2" style="text-decoration: none" href="{% url 'profile-detail' i.id %}">{{ i.name }}</a><br/>
+            <img class="img-fluid img-thumbnail" src="{{ i.logo.url }}"><br/>
+            {{ i.description }}<br/>
+            Rating: {{ i.rate }}<br/>
+            Category: {{ i.category }}
+            <br/><br/>
+        {% endfor %}</div>
 {% endblock %}
 
