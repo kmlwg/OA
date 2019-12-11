@@ -68,12 +68,23 @@ class ProfileDetailView(DetailView):
                 new_fav.user = author
                 new_fav.profile = profile
                 new_fav.save()
+
+        # Map
+        geolocator = Nominatim()
+        restaurant = Profile.objects.filter(id=kwargs['pk'])
+        name = restaurant[0].name
+        address = restaurant[0].adres
+        location = geolocator.geocode(address)
+
         context = {
             'profile': profile,
             'form': form,
             'com': com,
             'save_form': save_form,
-            'n': n
+            "name": name,
+            'n': n,
+            "lat": location.latitude,
+            "lng": location.longitude
         }
         return render(request, self.template_name, context)
 
