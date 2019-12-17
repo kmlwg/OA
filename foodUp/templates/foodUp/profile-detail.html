@@ -10,7 +10,7 @@
             </div>
             <div class="col-md-6 mx-auto">
                 <h1 class="text-body">{{ profile.name }}</h1>
-                {% ratings profile %}
+                <h6>{% ratings profile %}</h6>
                 {% comment %} <h2 class="text-success">Rate: {{profile.rate}}</h2> {% endcomment %}
                 <h3 class="text-muted"><em>Description: {{ profile.description }}</em></h3>
                 <h6 class="text-info">Email: {{ profile.email }}</h6>
@@ -60,21 +60,21 @@
                 <form method="POST">
                     {% csrf_token %}
                     {{ form|crispy }}
-                    <div class="float-right mb=5">
+                    <div class="float-right mb-5">
                         <button class="btn btn-primary" type="submit"
                                 style="font-size: 2rem; padding: 1rem 2rem 1rem 2rem; border-radius: 100px; border: 1px solid">
                             Comment
                         </button>
                     </div>
                 </form>
+                <br/><br/><br/>
             </div>
-        {% else %}
-            Sign up to make comment!
-            <a href="{% url 'login' %}">Log in</a>
+        {% else %}<br/>
+            <a href="{% url 'login' %}" style="font-size: 1.5rem;">Log in to make comment!</a>
         {% endif %}
         <div class="article-metadata mt-5">
             {% for c in com %}
-                <article class="media content-section border border-info rounded my-2">
+                <article class="content-section border border-info rounded my-2">
                     <div class="article-metadata">
                         <h4 class="text-primary ml-3">{{ c.sender }}</h4>
                         <p class="article-content ml-5">{{ c.com }}</p>
