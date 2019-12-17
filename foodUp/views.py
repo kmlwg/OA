@@ -154,6 +154,7 @@ def search(request):
                         f_profiles.append(p)
 
                 profiles = f_profiles
+                
             context = {
                 'form': my_form,
                 'profiles': profiles
