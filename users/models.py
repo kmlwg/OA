@@ -1,6 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.contrib.contenttypes.fields import GenericRelation
 from multiselectfield import MultiSelectField
+from star_ratings.models import Rating
+
 
 
 class User(AbstractUser):
@@ -36,7 +39,7 @@ class Profile(models.Model):
     phone_number = models.TextField(default='')
     time_opened = models.TimeField(null=True)
     time_closed = models.TimeField(null=True)
-    rate = models.DecimalField(default=0.0, max_digits=5, decimal_places=2)
+    ratings = GenericRelation(Rating, related_query_name='profiles')
     category = MultiSelectField(choices=FOOD_CHOICES, default=None)
     price = MultiSelectField(choices=PRICE_CHOICES, default=None)
 
