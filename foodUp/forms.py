@@ -1,6 +1,10 @@
+from crispy_forms.layout import Div
 from django import forms
+from django.db.models import Model
+from django.forms import ModelForm, Form
 from .models import Comment, Post
 from users.models import Favourites
+from crispy_forms.helper import FormHelper, Layout
 
 
 class Search(forms.Form):
@@ -14,10 +18,10 @@ class Category(forms.Form):
         ('beer', 'beer'),
         ('pasta', 'pasta'),
         ('burger', 'burger'),
-		('cake', 'cake'),
-		('chinese', 'chinese'),
-		('soup', 'soup'),
-		('pancakes', 'pancakes'),
+        ('cake', 'cake'),
+        ('chinese', 'chinese'),
+        ('soup', 'soup'),
+        ('pancakes', 'pancakes'),
         ('dumplings', 'dumplings'),
     )
     PRICES = (

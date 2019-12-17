@@ -4,7 +4,15 @@
 	<div>
 		<form method="POST">
 			{% csrf_token %}
-			{{ edit_form|crispy }}
+			{{ edit_form.name|as_crispy_field }}
+			{{ edit_form.description|as_crispy_field }}
+			{{ edit_form.adres|as_crispy_field }}
+			{{ edit_form.email|as_crispy_field }}
+			{{ edit_form.time_opened|as_crispy_field }}
+			{{ edit_form.time_closed|as_crispy_field }}
+			{{ edit_form.phone_number|as_crispy_field }}
+			{{ edit_form.category|as_crispy_field }}
+			{{ edit_form.price|as_crispy_field }}
 			<button class="btn btn-primary" type="submit" style="font-size: 2rem; padding: 1rem 2rem 1rem 2rem; border-radius: 100px; border: 1px solid">Save</button>
 		</form>
 	</div>
