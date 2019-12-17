@@ -32,25 +32,19 @@
                         zoom: 15,
                         center: {lat: {{ lat }}, lng: {{ lng }}}
                     };
-
                     // New map
                     let map = new google.maps.Map(document.getElementById('map'), options);
-
-
                     // Add marker
                     let marker = new google.maps.Marker({
                         position: {lat: {{ lat }}, lng: {{ lng }}},
                         map: map
                     });
-
                     let infoWindow = new google.maps.InfoWindow({
                         content: '<h1>{{ name }}</h1>'
                     });
-
                     marker.addListener('click', function () {
                         infoWindow.open(map, marker);
                     });
-
                 }
             </script>
         </div>
@@ -70,7 +64,7 @@
                 <br/><br/><br/>
             </div>
         {% else %}<br/>
-            <a href="{% url 'login' %}" style="font-size: 1.5rem;">Log in to make comment!</a>
+            <p style="text-align: center"><a href="{% url 'login' %}" style="font-size: 1.5rem">Log in to make comment!</a></p>
         {% endif %}
         <div class="article-metadata mt-5">
             {% for c in com %}
