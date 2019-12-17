@@ -148,12 +148,17 @@ def search(request):
                 profiles = set(f_profiles)
 
             if r != None:
-                f_profiles = []
-                for p in profiles:
-                    if p.rate >= r:
-                        f_profiles.append(p)
+                rated_profiles = profiles.filter(ratings__isnull=False)
+                final_profiles = []
 
-                profiles = f_profiles
+                for p in profiles:
+                    rating = p.ratings.get(object_id=p.id)
+                    avg = rating.average
+
+                    if avg >= r:
+                        final_profiles.append(p)
+
+                profiles = final_profiles
                 
             context = {
                 'form': my_form,
