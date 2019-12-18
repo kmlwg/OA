@@ -5,6 +5,15 @@ from .forms import Search, Category, MakeComment, SaveFavourite
 from users.models import User, Profile, Favourites
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from geopy.geocoders import Nominatim
+from geopy.exc import GeocoderTimedOut
+
+
+def do_geocode(address):
+    geolocator = Nominatim()
+    try:
+        return geolocator.geocode(address)
+    except GeocoderTimedOut:
+        return do_geocode(address)
 
 
 def home(request):
@@ -42,11 +51,10 @@ class ProfileDetailView(DetailView):
         com = Comment.objects.filter(receiver_id=kwargs['pk'])
 
         # Map
-        geolocator = Nominatim()
         restaurant = Profile.objects.filter(id=kwargs['pk'])
         name = restaurant[0].name
         address = restaurant[0].adres
-        location = geolocator.geocode(address)
+        location = do_geocode(address)
 
         context = {
             'profile': profile,
@@ -70,6 +78,7 @@ class ProfileDetailView(DetailView):
             new_comment.sender = author
             new_comment.receiver = profile
             new_comment.save()
+            form = MakeComment()
         if save_form.is_valid():
             new_fav = save_form.save(commit=False)
             n = Favourites.objects.filter(user=author)
@@ -80,11 +89,10 @@ class ProfileDetailView(DetailView):
                 new_fav.save()
 
         # Map
-        geolocator = Nominatim()
         restaurant = Profile.objects.filter(id=kwargs['pk'])
         name = restaurant[0].name
         address = restaurant[0].adres
-        location = geolocator.geocode(address)
+        location = do_geocode(address)
 
         context = {
             'profile': profile,
@@ -169,7 +177,7 @@ def search(request):
                         final_profiles.append(p)
 
                 profiles = final_profiles
-                
+
             context = {
                 'form': my_form,
                 'profiles': profiles
