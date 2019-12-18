@@ -9,8 +9,18 @@ from geopy.geocoders import Nominatim
 
 def home(request):
     n = Profile.objects.order_by('-pk')[:3]
+    ratings = []
+
+    for p in n:
+        rating = p.ratings.get(object_id=p.id)
+        if rating.average > 0:
+            ratings.append(rating.average)
+        else:
+            ratings.append('Not rated')
+
+    profiles = zip(n, ratings)
     context = {
-        'n': n
+        'profiles': profiles,
     }
     return render(request, 'foodUp/newcompany.html', context)
 
@@ -148,12 +158,18 @@ def search(request):
                 profiles = set(f_profiles)
 
             if r != None:
-                f_profiles = []
-                for p in profiles:
-                    if p.rate >= r:
-                        f_profiles.append(p)
+                rated_profiles = profiles.filter(ratings__isnull=False)
+                final_profiles = []
 
-                profiles = f_profiles
+                for p in profiles:
+                    rating = p.ratings.get(object_id=p.id)
+                    avg = rating.average
+
+                    if avg >= r:
+                        final_profiles.append(p)
+
+                profiles = final_profiles
+                
             context = {
                 'form': my_form,
                 'profiles': profiles
@@ -168,7 +184,17 @@ def search(request):
 
 def newcompany(request):
     n = Profile.objects.order_by('-pk')[:3]
+    ratings = []
+
+    for p in n:
+        rating = p.ratings.get(object_id=p.id)
+        if rating.average > 0:
+            ratings.append(rating.average)
+        else:
+            ratings.append('Not rated')
+
+    profiles = zip(n, ratings)
     context = {
-        'n': n
+        'profiles': profiles,
     }
     return render(request, 'foodUp/newcompany.html', context)
